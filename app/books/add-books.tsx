@@ -15,7 +15,7 @@ import { wixClient } from "@/lib/wix";
 
 import React from "react";
 
-export const AddBooksDialog = () => {
+const AddBooksDialog = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -87,3 +87,5 @@ export const AddBooksDialog = () => {
     </Dialog>
   );
 };
+
+export default AddBooksDialog;

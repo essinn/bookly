@@ -10,7 +10,7 @@ interface Review {
   review: string;
 }
 
-export const page = async ({ params }: { params: { bookId: string } }) => {
+const page = async ({ params }: { params: { bookId: string } }) => {
   const book = await wixClient.items.get("Books", params.bookId);
 
   const reviews = await wixClient.items

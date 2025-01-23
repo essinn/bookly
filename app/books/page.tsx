@@ -5,10 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { redirect } from "next/navigation";
-import { AddBooksDialog } from "./add-books";
 import { BookOpenIcon } from "lucide-react";
+import AddBooksDialog from "./add-books";
 
-export const page = async ({
+const page = async ({
   searchParams,
 }: {
   searchParams: { search?: string };
