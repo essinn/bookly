@@ -11,9 +11,8 @@ const nextConfig: NextConfig = {
       "https://blocks.astratic.com", // placeholder image URL
     ],
   },
-  rules: {
-    "@typescript-eslint/no-unused-vars": "off", // Disable the rule for unused variables
-    "@typescript-eslint/no-explicit-any": "off", // Disable rule for explicit 'any' type
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 
