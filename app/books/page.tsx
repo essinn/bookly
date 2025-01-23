@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { redirect } from "next/navigation";
+import { AddBooksDialog } from "./add-books";
+import { BookIcon, BookOpenIcon } from "lucide-react";
 
 export const page = async ({
   searchParams,
@@ -31,10 +33,18 @@ export const page = async ({
           }}
         >
           <Input name="search" type="text" placeholder="Search books..." />
-          <Button type="submit">Search</Button>
+          {searchParams.search ? (
+            <Button variant={"secondary"} asChild>
+              <Link href="/books">Reset</Link>
+            </Button>
+          ) : (
+            <Button variant={"secondary"} type="submit">
+              Search
+            </Button>
+          )}
         </form>
         <Button asChild>
-          <Link href="/add-books">Add Book</Link>
+          <AddBooksDialog />
         </Button>
       </div>
       <form className="gap-2 flex md:hidden pt-10 pb-5">
@@ -53,20 +63,26 @@ export const page = async ({
             className="border border-zinc-200 hover:border-zinc-400 p-2 rounded hover:shadow-md flex flex-col gap-2"
           >
             <div className="relative w-full h-64">
-              <Image
-                src={book?.image}
-                alt="image"
-                layout="fill"
-                objectFit="contain"
-                className="rounded"
-              />
+              {book?.image ? (
+                <Image
+                  src={book?.image}
+                  alt="image"
+                  layout="fill"
+                  objectFit="contain"
+                  className="rounded"
+                />
+              ) : (
+                <div className="flex items-center justify-center flex-col gap-3 bg-zinc-100 h-full w-full rounded">
+                  <BookOpenIcon className="h-8 w-8 text-black" />
+                  <p className="text-black text-lg font-bold">
+                    No Image Available
+                  </p>
+                </div>
+              )}
             </div>
             <h2 className="text-lg font-medium">{book?.title}</h2>
             <p className="text-sm">{book?.author}</p>
-            <Button
-              className="bg-white text-black hover:bg-zinc-100 my-2"
-              asChild
-            >
+            <Button variant={"secondary"} asChild>
               <Link href={`/books/${book?._id}`}>Reviews</Link>
             </Button>
           </div>

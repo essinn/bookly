@@ -1,4 +1,5 @@
 export const NAVLINKS = [
-  { name: "Books", href: "/books" },
-  { name: "Add Books", href: "/add-books" },
+  { name: "Browse Books", href: "/books" },
+  // { name: "Sign In", href: "/sign-in" },
+  // { name: "Sign Up", href: "/sign-up" },
 ];
