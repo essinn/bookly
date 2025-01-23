@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { redirect } from "next/navigation";
 import { AddBooksDialog } from "./add-books";
-import { BookIcon, BookOpenIcon } from "lucide-react";
+import { BookOpenIcon } from "lucide-react";
 
 export const page = async ({
   searchParams,
