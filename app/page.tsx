@@ -51,7 +51,7 @@ export const page = async () => {
       </div>
 
       <div className="flex items-center justify-center">
-        <Button asChild variant={"secondary"}>
+        <Button asChild variant="secondary">
           <Link href="/books">Browse all books</Link>
         </Button>
       </div>
