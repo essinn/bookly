@@ -3,10 +3,17 @@ import { wixClient } from "@/lib/wix";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
+import { Input } from "@/components/ui/input";
+import { redirect } from "next/navigation";
 
-export const page = async () => {
+export const page = async ({
+  searchParams,
+}: {
+  searchParams: { search?: string };
+}) => {
   const books = await wixClient.items
     .query("Books")
+    .startsWith("title", searchParams.search ?? "")
     .find()
     .then(res => res.items.map(item => item.data || item));
 
@@ -14,10 +21,31 @@ export const page = async () => {
     <div className="px-10 py-20 md:p-20">
       <div className="flex justify-between items-center">
         <h1 className="font-bold text-3xl text-black text-center">Books</h1>
+        <form
+          className="gap-2 hidden md:flex"
+          action={async formData => {
+            "use server";
+
+            const search = formData.get("search");
+            redirect(`/books?search=${search}`);
+          }}
+        >
+          <Input name="search" type="text" placeholder="Search books..." />
+          <Button type="submit">Search</Button>
+        </form>
         <Button asChild>
           <Link href="/add-books">Add Book</Link>
         </Button>
       </div>
+      <form className="gap-2 flex md:hidden pt-10 pb-5">
+        <Input type="text" placeholder="Search books..." />
+        <Button type="submit">Search</Button>
+      </form>
+      {books.length === 0 && (
+        <p className="text-center py-20 font-bold text-xl">
+          No Books Available
+        </p>
+      )}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6 py-10">
         {books.map(book => (
           <div
