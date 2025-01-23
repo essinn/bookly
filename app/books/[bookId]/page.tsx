@@ -3,6 +3,13 @@ import { wixClient } from "@/lib/wix";
 import { BookOpen, Star } from "lucide-react";
 import ReviewForm from "@/components/review-form";
 
+interface Review {
+  _id: string;
+  rating: number;
+  name: string;
+  review: string;
+}
+
 export const page = async ({ params }: { params: { bookId: string } }) => {
   const book = await wixClient.items.get("Books", params.bookId);
 
@@ -25,7 +32,7 @@ export const page = async ({ params }: { params: { bookId: string } }) => {
 
           <h2 className="text-2xl font-semibold mb-4">Reviews</h2>
           {reviews?.items.length > 0 ? (
-            reviews?.items.map((review: any) => (
+            (reviews?.items as Review[]).map((review: Review) => (
               <div key={review._id} className="mb-4 p-4 bg-gray-100 rounded-lg">
                 <div className="flex items-center mb-2">
                   <Star className="w-5 h-5 text-yellow-500 mr-1" />

@@ -12,13 +12,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { wixClient } from "@/lib/wix";
-import { useRouter } from "next/navigation";
 
 import React from "react";
 
 export const AddBooksDialog = () => {
-  // const router = useRouter();
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -44,7 +41,7 @@ export const AddBooksDialog = () => {
             const isbn = formData.get("isbn");
             const image = formData.get("image");
 
-            const res = await wixClient.items.insert("Books", {
+            await wixClient.items.insert("Books", {
               title,
               author,
               description,
@@ -53,8 +50,6 @@ export const AddBooksDialog = () => {
               isbn,
               image,
             });
-
-            // router.push(`/books/${res.dataItem?._id}`);
           }}
           className="space-y-4"
         >
